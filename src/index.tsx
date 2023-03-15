@@ -1,19 +1,50 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import ReactDOM from "react-dom/client";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+import reset from "styled-reset";
+import { darkTheme } from "./theme";
+import App from "./App";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  document.getElementById("root") as HTMLElement
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const GlobalStyle = createGlobalStyle`
+${reset}
+* {
+  box-sizing: border-box;
+}
+body {
+  font-weight: 300;
+  font-family: "Pretendard", serif;
+  /* background-color: ${(props) => props.theme.bgColor}; */
+  color: black;
+  line-height: 1.2;
+  background:linear-gradient(135deg,#e09,#d0e);
+}
+a {
+  text-decoration: none;
+  color: inherit;
+  &:link,&:visited{
+  color: inherit;
+  }
+}
+button{
+  cursor: pointer;
+  border: none;
+  /* padding: 0; 
+  margin: 0; */
+  /* background-color: transparent; */
+}
+li {
+  list-style: none;
+}
+`;
+
+root.render(
+  // <React.StrictMode>
+  <ThemeProvider theme={darkTheme}>
+    <GlobalStyle />
+    <App />
+  </ThemeProvider>
+  // </React.StrictMode>
+);
