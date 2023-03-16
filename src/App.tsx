@@ -1,29 +1,30 @@
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useMotionValueEvent } from "framer-motion";
 // import Variants from "./components/Variants";
 // import BasicAnimations from "./components/BasicAnimations";
-
-const boxVariants = {
-  hover: { scale: 1.5, rotateZ: 90 },
-  click: { scale: 1, borderRadius: "100px" },
-  // 드래그하는 10초 동안 컬러가 변함.
-  drag: { backgroundColor: "rgb(46, 204,113)", transition: { duration: 10 } },
-};
-// color설정은 rgb나 rgba로만 해야함.
-// duration -> 애니메이션을 마칠때까지 걸리는 시간
+// import GesturesPartOne from "./components/GesturesPartOne";
+// import GesturesPartTwo from "./components/GesturesPartTwo";
 
 function App() {
+  const x = useMotionValue(0); // box를 드래그할때마다 이 x값은 업데이트될거임. 그치만 컴포넌트가 리랜더링되진 않음. (concole.log가 한번만 뜸)
+  const motionValue = useMotionValueEvent(x, "change", (i) => {
+    console.log(i);
+  }); // 이렇게해야 motionValue값을 알 수 있음
+  console.log(motionValue);
+
   return (
     <>
       {/* <Variants /> */}
       {/* <BasicAnimations /> */}
+      {/* <GesturesPartOne /> */}
+      {/* <GesturesPartTwo /> */}
       <Wrapper>
+        <button onClick={() => x.set(200)}></button>
+        {/* x값을 200으로 세팅해줘서 위치를 바꿔줌 */}
         <Box
-          drag
-          variants={boxVariants}
-          whileHover="hover" // hover 했을떼
-          whileTap="click" // click 하고 있을때
-          whileDrag="drag" // grag 하고 있을때
+          style={{ x: x }}
+          drag="x" // x축으로만 이동 가능
+          dragSnapToOrigin // 놓으면 원점으로 돌아감
         />
       </Wrapper>
     </>
@@ -43,7 +44,7 @@ const Wrapper = styled.div`
 const Box = styled(motion.div)`
   width: 200px;
   height: 200px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 1);
   border-radius: 40px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
 `;
