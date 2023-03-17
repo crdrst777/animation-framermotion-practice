@@ -1,10 +1,5 @@
 import styled from "styled-components";
-import {
-  motion,
-  useMotionValue,
-  useMotionValueEvent,
-  useTransform,
-} from "framer-motion";
+import { motion } from "framer-motion";
 
 const svg = {
   start: { pathLength: 0, fill: "rgba(255, 255, 255, 0)" },
