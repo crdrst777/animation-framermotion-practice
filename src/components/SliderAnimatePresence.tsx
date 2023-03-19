@@ -3,54 +3,64 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 const box = {
-  // 처음 -  initial
-  invisible: {
-    x: 500,
+  // 처음 -  initial   // isBack -> 뭘로쓰던 상관없음
+  entry: (isBack: boolean) => ({
+    x: isBack ? -500 : 500,
     opacity: 0,
     scale: 0,
-  },
+  }),
   // 중간 - animate
-  visible: {
+  center: {
     x: 0,
     opacity: 1,
     scale: 1,
     transition: {
-      duration: 1,
+      duration: 0.5,
     },
   },
   // 끝 - exit   // 버튼 누름 -> state가 바뀜 -> 언마운트
-  exit: {
-    x: -500,
+  exit: (isBack: boolean) => ({
+    x: isBack ? 500 : -500,
     opacity: 0,
     scale: 0,
     transition: {
-      duration: 1,
+      duration: 0.5,
     },
-  },
+  }),
 };
 
 function SliderAnimatePresence() {
   const [visible, setVisible] = useState(1);
-  const nextPlease = () => setVisible((prev) => (prev === 10 ? 10 : prev + 1));
+  const [back, setBack] = useState(false);
+  const nextPlease = () => {
+    setBack(false);
+    setVisible((prev) => (prev === 10 ? 10 : prev + 1));
+  };
+  const prevPlease = () => {
+    setBack(true);
+    setVisible((prev) => (prev === 1 ? 1 : prev - 1));
+  };
 
   return (
     <Wrapper>
-      <AnimatePresence>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) =>
-          i === visible ? (
-            <Box
-              variants={box}
-              initial="invisible"
-              animate="visible"
-              exit="exit"
-              key={i}
-            >
-              {i}
-            </Box>
-          ) : null
-        )}
+      <AnimatePresence custom={back}>
+        {/* {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) =>
+          i === visible ? ( */}
+        <Box
+          custom={back}
+          variants={box}
+          initial="entry"
+          animate="center"
+          exit="exit"
+          key={visible}
+        >
+          {visible}
+        </Box>
+        {/* ) : null
+        )} */}
       </AnimatePresence>
       <button onClick={nextPlease}>next</button>
+      <button onClick={prevPlease}>prev</button>
     </Wrapper>
   );
 }
