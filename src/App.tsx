@@ -12,7 +12,8 @@ import {
 // import MotionValues from "./components/MotionValues";
 // import SVGAnimation from "./components/SVGAnimation";
 // import BasicAnimatePresence from "./components/BasicAnimatePresence";
-import SliderAnimatePresence from "./components/SliderAnimatePresence";
+// import SliderAnimatePresence from "./components/SliderAnimatePresence";
+import LayoutAnimation from "./components/LayoutAnimation";
 
 function App() {
   return (
@@ -24,7 +25,8 @@ function App() {
       {/* <MotionValues /> */}
       {/* <SVGAnimation /> */}
       {/* <BasicAnimatePresence /> */}
-      <SliderAnimatePresence />
+      {/* <SliderAnimatePresence /> */}
+      <LayoutAnimation />
 
       {/* <Wrapper></Wrapper> */}
     </>
