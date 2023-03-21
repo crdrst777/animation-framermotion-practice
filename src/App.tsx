@@ -13,7 +13,8 @@ import {
 // import SVGAnimation from "./components/SVGAnimation";
 // import BasicAnimatePresence from "./components/BasicAnimatePresence";
 // import SliderAnimatePresence from "./components/SliderAnimatePresence";
-import LayoutAnimation from "./components/LayoutAnimation";
+// import LayoutAnimation from "./components/LayoutAnimation";
+import FinalProject from "./components/FinalProject";
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
       {/* <SVGAnimation /> */}
       {/* <BasicAnimatePresence /> */}
       {/* <SliderAnimatePresence /> */}
-      <LayoutAnimation />
+      {/* <LayoutAnimation /> */}
+      <FinalProject />
 
       {/* <Wrapper></Wrapper> */}
     </>
